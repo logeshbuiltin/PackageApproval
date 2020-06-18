@@ -1,0 +1,252 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-warning card-header-icon">
+                      <div class="card-icon">
+                          <i class="material-icons">content_copy</i>
+                      </div>
+                      <p class="card-category">SKU</p>
+                      <h3 class="card-title">#57101
+                      </h3>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <i class="material-icons text-danger">warning</i>
+                          <a href="javascript:void(0)">Pending SKU</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-success card-header-icon">
+                      <div class="card-icon">
+                          <i class="material-icons">check_circle_outline</i>
+                      </div>
+                      <p class="card-category">Completed SKU</p>
+                      <h3 class="card-title">48</h3>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <i class="material-icons">date_range</i> Last 24 Hours
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-danger card-header-icon">
+                      <div class="card-icon">
+                          <i class="material-icons">info_outline</i>
+                      </div>
+                      <p class="card-category">Incorrect SKU</p>
+                      <h3 class="card-title">2</h3>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <i class="material-icons">date_range</i> Last 24 Hours
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-danger header-style-lg">
+                    <h4 class="card-title">SKU #{{skuNo}}</h4>
+                    <p class="card-category">Complete your CTN</p>
+                    <div class="logo-img image-margin-lg">
+                        <lib-ngx-image-zoom class="pull-right"
+                        [thumbImage]=myThumbnail
+                        [magnification]="2" 
+                        [zoomMode]="'hover'"
+                    ></lib-ngx-image-zoom>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="skuDetailsForm"
+                          data-automation-attribute="form-add-service">
+                        <div class="row">
+                            <div class="col-md-4">
+                              <mat-form-field class="example-full-width">
+                                <mat-label>SKU No.</mat-label>
+                                <mat-select
+                                    placeholder="SKU"
+                                    formControlName="skuNo"
+                                    [(ngModel)]="skuNo"
+                                    data-automation-attribute="text-encounter-no"
+                                    >
+                                    <mat-option *ngFor="let sku of skuList" [value]="sku">
+                                        {{ sku }}
+                                    </mat-option>
+                                </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>QTY/CTN</mat-label>
+                                    <input
+                                      matInput
+                                      type="number"
+                                      (change)="setTotalSkuList()"
+                                      [(ngModel)]="quantity"
+                                      formControlName="quantity"
+                                      placeholder="qty"
+                                    />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>No of CTN</mat-label>
+                                    <mat-select
+                                        placeholder="CTN"
+                                        formControlName="ctnNo"
+                                        data-automation-attribute="text-encounter-no"
+                                        >
+                                        <mat-option *ngFor="let ctn of ctnList" [value]="ctn">
+                                            {{ ctn }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                              <mat-form-field class="example-full-width">
+                                <mat-label>Product.ASN.No</mat-label>
+                                    <input
+                                      matInput
+                                      type="text"
+                                      formControlName="asnNo"
+                                      placeholder="ASN No"
+                                    />
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                              <mat-form-field class="example-full-width">
+                                <mat-label>Product Name</mat-label>
+                                    <input
+                                      matInput
+                                      type="text"
+                                      formControlName="productName"
+                                      placeholder="Product Name"
+                                    />
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <mat-label>Color</mat-label>
+                                    <input
+                                        matInput
+                                        type="text"
+                                        formControlName="color"
+                                        placeholder="Color"
+                                    />
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                              <mat-form-field class="example-full-width">
+                                <mat-label>Packing Date</mat-label>
+                                <input matInput formControlName="packingDate" [matDatepicker]="picker1">
+                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <mat-label>ACT.Weight</mat-label>
+                                    <input
+                                        matInput
+                                        type="text"
+                                        formControlName="actWeight"
+                                        placeholder="Weight"
+                                    />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <mat-label>Tolarance</mat-label>
+                                    <input
+                                        matInput
+                                        type="text"
+                                        formControlName="tolarance"
+                                        placeholder="Tolarance"
+                                    />
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="table-container-50 tableFixHead">
+                        <table class="table table-hover">
+                            <thead class="text-warning">
+                                <th>S.No</th>
+                                <th>ASN.No</th>
+                                <th>Weight</th>
+                                <th>Tolerance</th>
+                                <th>Status</th>
+                            </thead>
+                            <tbody *ngFor="let sku of skuDataList">
+                                <tr>
+                                    <td>{{sku.sNo}}</td>
+                                    <td>
+                                     <input
+                                        type="text"
+                                        (focusout)="checkAsnNo(sku)"
+                                        class="table-text right number-box"
+                                        [(ngModel)]="sku.asnNo"
+                                        data-automation-attribute="text-quantity"
+                                      />
+                                    </td>
+                                    <td>
+                                        <input
+                                        type="number"
+                                        (focusout)="calculateTolerance(sku)"
+                                        class="table-text right number-box"
+                                        [(ngModel)]="sku.weight"
+                                        data-automation-attribute="text-quantity"
+                                        />
+                                    </td>
+                                    <td>{{sku.tolerance | number:'1.3-3'}}</td>
+                                    <td class="td-actions">
+                                        <div *ngIf="sku.status=='valid'"  class="btn-success square">
+                                            <i class="material-icons icon-margin">check</i>
+                                        </div>
+                                        <div *ngIf="sku.status=='uncheck'"  class="btn-success square">
+                                            <i class="material-icons icon-margin">info</i>
+                                        </div>
+                                        <div *ngIf="sku.status=='invalid'"  class="btn-danger square">
+                                            <i class="material-icons icon-margin">close</i>
+                                        </div>
+                                  </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        &nbsp;
+                    </div>
+                    <div class="col-md-3">
+                        <!-- <button mat-raised-button type="submit" class="btn btn-outline-success pull-right">Complete</button>
+                        <div class="clearfix"></div> -->
+                        <button mat-raised-button type="submit" class="btn btn-success pull-center">Complete</button>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="col-md-2">
+                        &nbsp;
+                    </div>
+                    <div class="col-md-2">
+                        <button mat-raised-button type="submit" class="btn btn-outline-success pull-center">save</button>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+      </div>
+  </div>
+</div>

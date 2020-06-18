@@ -1,0 +1,46 @@
+.text-warning {
+    background: lightgray !important;
+    position: sticky;
+}
+
+.table-container-50 {
+    height: 50vh !important;
+    margin-top: 10px;
+    overflow: scroll;
+}
+
+.table-scroll{
+    overflow: auto !important;
+  }
+
+.header-style-lg {
+    position: sticky;
+    height: 30vh;
+}
+
+.pull-right{
+    height: 50vh;
+}
+
+.image-margin-lg{
+    margin-top: -90px;
+}
+
+.square {
+    height: 30px;
+    width: 30px;
+    border-radius: 5px;
+}
+
+.icon-margin{
+    margin-top: 3px;
+    margin-left: 3px;
+}
+
+.tableFixHead          { overflow-y: auto; height: 100px; }
+.tableFixHead thead th { position: sticky; top: 0; }
+
+/* Just common table stuff. Really. */
+table  { border-collapse: collapse;}
+th, td { padding: 8px 16px; }
+th     { background:#eee; }

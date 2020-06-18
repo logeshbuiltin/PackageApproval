@@ -1,0 +1,87 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title ">SKU History Table</h4>
+                      <p class="card-category"> SKU completion details</p>
+                  </div>
+                  <div class="card-body">
+                      <div class="table-responsive">
+                          <table class="table">
+                              <thead class=" text-primary">
+                                  <th>SKU#</th>
+                                  <th>ASN.No</th>
+                                  <th>Item Desc</th>
+                                  <th>Color</th>
+                                  <th>Net Weight</th>
+                                  <th>GR Weight</th>
+                                  <th>IP</th>
+                                  <th>MP</th>
+                              </thead>
+                              <tbody *ngFor="let sku of skuDataList">
+                                  <tr>
+                                      <td>{{sku.skuNo}}</td>
+                                      <td>{{sku.asnNo}}</td>
+                                      <td>{{sku.itemDesc}}</td>
+                                      <td>{{sku.color}}</td>
+                                      <td>{{sku.netWeight | number:'1.3-3'}}</td>
+                                      <td>{{sku.grWeight | number:'1.3-3'}}</td>
+                                      <td>{{sku.ip}}</td>
+                                      <td class="text-primary">
+                                        {{sku.mp}}
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- <div class="col-md-12">
+              <div class="card card-plain">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title mt-0">CTN/QTY Details</h4>
+                      <p class="card-category">Each packahe details</p>
+                  </div>
+                  <div class="card-body">
+                      <div class="table-responsive">
+                          <table class="table table-hover">
+                              <thead class="">
+                                  <th>SKU.No</th>
+                                  <th>ASN.No</th>
+                                  <th>QTY/CTN</th>
+                                  <th>Weight</th>
+                                  <th>Tolerance</th>
+                                  <th>Verified By</th>
+                                  <th>Approved By</th>
+                                  <th>Date</th>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <td>
+                                          1
+                                      </td>
+                                      <td>
+                                          Dakota Rice
+                                      </td>
+                                      <td>
+                                          Niger
+                                      </td>
+                                      <td>
+                                          Oud-Turnhout
+                                      </td>
+                                      <td>
+                                          $36,738
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div> -->
+      </div>
+  </div>
+</div>
