@@ -22,6 +22,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatIconModule} from '@angular/material/icon'
 import {MatTableModule} from '@angular/material/table';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
+import { HttpClientModule } from '@angular/common/http';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   imports: [
@@ -37,14 +40,17 @@ import { NgxImageZoomModule } from 'ngx-image-zoom';
     MatDatepickerModule,
     MatTooltipModule,
     MatDatepickerModule,
-    MatNativeDateModule ,
+    MatNativeDateModule,
     MatIconModule,
     MatTableModule,
-    NgxImageZoomModule
+    MatSnackBarModule,
+    MatDialogModule,
+    NgxImageZoomModule,
+    HttpClientModule
   ],
   providers: [  
     MatDatepickerModule,
-    MatNativeDateModule  
+    MatNativeDateModule
   ],
   declarations: [
     DashboardComponent,

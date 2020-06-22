@@ -15,15 +15,15 @@
 
 .header-style-lg {
     position: sticky;
-    height: 30vh;
+    height: 25vh;
 }
 
 .pull-right{
-    height: 50vh;
+    height: 30vh;
 }
 
 .image-margin-lg{
-    margin-top: -90px;
+    margin-top: -140px;
 }
 
 .square {
@@ -44,3 +44,9 @@
 table  { border-collapse: collapse;}
 th, td { padding: 8px 16px; }
 th     { background:#eee; }
+
+
+.ngxImageZoomThumbnail {
+    pointer-events: all !important;
+    height: 40vh !important;
+}
