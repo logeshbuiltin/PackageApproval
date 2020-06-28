@@ -1,14 +1,19 @@
 <div class="modal-header modalHeaderBlack" data-automation-attribute="div-op-service">
     <span class="modal-title"><strong>Print Details</strong></span>
-    <span aria-label="Close" class="close" (click)="onNoClick()" data-automation-attribute="span-close-dialog">
+    <button mat-raised-button  (click)="onNoClick()" class="btn btn-danger pull-right">
         <i matTooltip="Wrong order" class="material-icons icon-margin">close</i>
-    </span>
+    </button>
 </div>
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12" style="margin-top: 15px;">
                 <h4><strong>SKU.NO:</strong> {{skuNo}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h4><strong>ASN.No:</strong> {{asnNo}}</h4>
             </div>
         </div>
         <div class="row">
@@ -23,7 +28,22 @@
         </div>
         <div class="row">
             <div class="col-md-12">
+                <h4><strong>Size:</strong> {{size}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
                 <h4><strong>Quantity:</strong> {{quantity}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h4><strong>Net Weight:</strong> {{netWeight}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h4><strong>GR Weight:</strong> {{grWeight}}</h4>
             </div>
         </div>
         <div class="row">

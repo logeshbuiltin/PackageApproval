@@ -57,10 +57,31 @@ export class TypographyComponent implements OnInit {
   setSkuTableList(data: any[]) {
     if(data && data.length > 0) {
       data.forEach(element => {
-        element.skuNo =  element.skuNo.toString();
-        this.skuMasterList.push(element);
+        let dbsData = {
+          skuNo: element['SKU#'].toString(),
+          upcNo: element['UPC#'],
+          asnNo: element['ASN .NO'],
+          designNo: element['MAXICAN DESIGN NO'],
+          itemDesc: element['ITEM DESCRIPTION'],
+          size: element['SIZE (IN)'],
+          color: element['COLOR'],
+          netWeightItem: element['NET WT (KGS) OF ITEM'],
+          grWeightItem: element['GR WT (KGS) OF ITEM'],
+          tolerance: element['tollarance'],
+          orderQty: element['order qty'],
+          qtyPerCtn: element['Qty per ctn'],
+          foldSize: element['FOLD SIZE (LXWXH) INCHES'],
+          ctnLength: element['CARTON SIZE (INCHES) L'],
+          ctnWidth: element['CARTON SIZE (INCHES W'],
+          ctnHeight: element['CARTON SIZE (INCHES) H'],
+          cbmCtn: element['CBM/CARTON'],
+          netWeightCtn: element['net weight'],
+          grWeightCtn: element['GR WT OF CTN (KGS)'],
+          packAccess: ""
+        }
+        this.skuMasterList.push(dbsData);
+        this.skuDataList.push(dbsData);
       });
-      this.skuDataList = data;
     }
   }
 

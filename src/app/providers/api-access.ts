@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { BASE_URL } from "assets/properties";
 import { map } from 'rxjs/operators';
+import { BASE_URL } from "assets/properties";
 
 
 @Injectable()
@@ -12,6 +12,7 @@ export class ApiAccessProvider {
     static readonly SKU_CTNNO_URL = "/getctnno/";
     static readonly SKU_LIST_URL = "/getallskuDetails";
     static readonly SKU_ITEM_SAVE_URL = "/postitem/";
+    static readonly SKU_ITEM_GETALL = "/getallctn";
     static readonly SKU_MASTER_SAVE_URL = "/postskumaster";
     static readonly SKU_MASTER_DELETE_URL = "/skumasterdelete/";
     static readonly SKU_MASTER_STATUS_UPDATE = "/updateskumaster/";
@@ -185,6 +186,28 @@ export class ApiAccessProvider {
                 skuData = data;
             } 
             observer.next(skuData);
+            setTimeout(() => {
+                observer.complete();
+            }, 5000);
+            }, error => {
+                observer.next(false);
+                setTimeout(() => {
+                    observer.complete();
+                }, 5000);
+            });
+        }, err => console.error(err));
+    }
+
+    public getAllItemList() {
+        let skuList: any;
+        return Observable.create(observer => {
+        this.http.get(BASE_URL+ApiAccessProvider.SKU_ITEM_GETALL)
+        .pipe(map((res: any) => res))
+        .subscribe( data => {
+            if (data) {
+                skuList = data;
+            } 
+            observer.next(skuList);
             setTimeout(() => {
                 observer.complete();
             }, 5000);

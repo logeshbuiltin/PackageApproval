@@ -97,8 +97,7 @@
             ],
             "assets": [
               "src/assets",
-              "src/favicon.ico",
-              "404.html"
+              "src/favicon.ico"
             ]
           }
         },

@@ -12,6 +12,10 @@ export class PrintLabelComponent implements OnInit {
   itemDesc: string = "";
   color: string = "";
   quantity: number = 0;
+  size: string = "";
+  asnNo: string = "";
+  netWeight: number = 0;
+  grWeight: number = 0;
 
   constructor(
     public dialogRef: MatDialogRef<PrintLabelComponent>,
@@ -21,6 +25,10 @@ export class PrintLabelComponent implements OnInit {
     this.itemDesc = data.itemDesc;
     this.color = data.color;
     this.quantity = data.quantity;
+    this.asnNo = data.asnNo;
+    this.size = data.size;
+    this.netWeight = data.netWeight;
+    this.grWeight = data.grWeight;
   }
 
   ngOnInit(): void {
@@ -42,4 +50,7 @@ export interface DialogData {
   itemDesc: string;
   asnNo: string; 
   quantity: number;
+  size: string;
+  netWeight: number;
+  grWeight: number;
 }

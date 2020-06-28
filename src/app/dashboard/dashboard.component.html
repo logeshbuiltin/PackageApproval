@@ -1,72 +1,102 @@
 <div class="main-content">
   <div class="container-fluid">
-      <div class="row">
-          <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                  <div class="card-header card-header-warning card-header-icon">
-                      <div class="card-icon">
-                          <i class="material-icons">content_copy</i>
-                      </div>
-                      <p class="card-category">SKU</p>
-                      <h3 class="card-title">#{{skuNo}}
-                      </h3>
-                  </div>
-                  <div class="card-footer">
-                      <div class="stats">
-                          <i class="material-icons text-danger">warning</i>
-                          <a href="javascript:void(0)">Pending SKU</a>
-                      </div>
-                  </div>
-              </div>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+            Quick Menu panel
+            </mat-panel-title>
+            <mat-panel-description>
+            To download Shipping CTN details click here
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">content_copy</i>
+                        </div>
+                        <p class="card-category">SKU</p>
+                        <h3 class="card-title">#{{skuNo}}
+                        </h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons text-danger">warning</i>
+                            <a href="javascript:void(0)">Pending SKU</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">check_circle_outline</i>
+                        </div>
+                        <p class="card-category">Completed SKU</p>
+                        <h3 class="card-title">{{completedSku}}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">date_range</i> Source Database
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">info_outline</i>
+                        </div>
+                        <p class="card-category">Total SKU</p>
+                        <h3 class="card-title">{{totalSku}}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">date_range</i> Source Database
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-primary card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">date_range</i>
+                        </div>
+                        <p class="card-category pull-center">Click to Download</p>
+                        <button type="button" mat-raised-button (click)="downloadExcel()" class="btn-success">Shipping Details</button>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">date_range</i> Source Database
+                        </div>
+                    </div>
+                </div>
+            </div>
           </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                  <div class="card-header card-header-success card-header-icon">
-                      <div class="card-icon">
-                          <i class="material-icons">check_circle_outline</i>
-                      </div>
-                      <p class="card-category">Completed SKU</p>
-                      <h3 class="card-title">{{completedSku}}</h3>
-                  </div>
-                  <div class="card-footer">
-                      <div class="stats">
-                          <i class="material-icons">date_range</i> Source Database
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                  <div class="card-header card-header-danger card-header-icon">
-                      <div class="card-icon">
-                          <i class="material-icons">info_outline</i>
-                      </div>
-                      <p class="card-category">Total SKU</p>
-                      <h3 class="card-title">{{totalSku}}</h3>
-                  </div>
-                  <div class="card-footer">
-                      <div class="stats">
-                          <i class="material-icons">date_range</i> Source Database
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
+    </mat-expansion-panel>
       <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header card-header-danger header-style-lg">
+                <div class="card-header card-header-danger">
                     <h4 class="card-title">SKU #{{skuNo}}</h4>
                     <p class="card-category">Complete your CTN</p>
                     <p class="card-category">Enter Ctn number and pack the Ctn, once the below order is completed</p>
-                    <div class="logo-img image-margin-lg">
+                    <!-- <div class="logo-img image-margin-lg">
                         <lib-ngx-image-zoom class="pull-right"
                         [thumbImage]=myThumbnail
                         [magnification]="2" 
                         [zoomMode]="'hover'"
                     ></lib-ngx-image-zoom>
-                    </div>
+                    </div> -->
                 </div>
+                <!-- <div class="img-align-lg">
+                    <img class="logo-img pull-right img-details-lg" [src]="myThumbnail">
+                </div> -->
                 <div class="card-body">
                     <form [formGroup]="skuDetailsForm"
                           data-automation-attribute="form-add-service">
@@ -96,6 +126,7 @@
                                       (change)="setTotalSkuList()"
                                       [(ngModel)]="quantity"
                                       formControlName="quantity"
+                                      [readonly]="true"
                                       placeholder="qty"
                                     />
                                 </mat-form-field>
@@ -123,6 +154,7 @@
                                     <input
                                       matInput
                                       type="text"
+                                      [readonly]="true"
                                       formControlName="asnNo"
                                       placeholder="ASN No"
                                     />
@@ -135,6 +167,7 @@
                                       matInput
                                       type="text"
                                       [(ngModel)]="productName"
+                                      [readonly]="true"
                                       formControlName="productName"
                                       placeholder="Product Name"
                                     />
@@ -147,6 +180,7 @@
                                         matInput
                                         type="text"
                                         [(ngModel)]="color"
+                                        [readonly]="true"
                                         formControlName="color"
                                         placeholder="Color"
                                     />
@@ -168,6 +202,7 @@
                                     <input
                                         matInput
                                         type="text"
+                                        [readonly]="true"
                                         formControlName="actWeight"
                                         placeholder="Weight"
                                     />
@@ -179,6 +214,7 @@
                                     <input
                                         matInput
                                         type="text"
+                                        [readonly]="true"
                                         formControlName="tolarance"
                                         placeholder="Tolarance"
                                     />
@@ -186,7 +222,7 @@
                             </div>
                         </div>
                     </form>
-                    <div class="table-container-50 tableFixHead">
+                    <div class="table-container-85 tableFixHead">
                         <table class="table table-hover">
                             <thead class="text-warning">
                                 <th>S.No</th>
@@ -194,6 +230,7 @@
                                 <th>Weight</th>
                                 <th>Tolerance</th>
                                 <th>Status</th>
+                                <th>Comments</th>
                             </thead>
                             <tbody *ngFor="let sku of skuDataList">
                                 <tr>
@@ -202,17 +239,21 @@
                                      <input
                                         type="text"
                                         (input)="checkAsnNoAndTolerance(sku)"
+                                        id="tab{{sku.itemNo}}"
                                         class="table-text right number-box"
                                         [(ngModel)]="sku.asnNo"
+                                        (keyup.enter)="focusText.focus()"
                                         data-automation-attribute="text-quantity"
                                       />
                                     </td>
                                     <td>
                                         <input
                                         type="number"
+                                        #focusText
                                         (input)="checkAsnNoAndTolerance(sku)"
                                         class="table-text right number-box"
                                         [(ngModel)]="sku.weight"
+                                        (keyup.enter)="onInputEntry($event,'tab',sku)"
                                         data-automation-attribute="text-quantity"
                                         />
                                     </td>
@@ -228,19 +269,18 @@
                                             <i matTooltip="Wrong order" class="material-icons icon-margin">close</i>
                                         </div>
                                   </td>
+                                  <td>{{sku.comments}}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row row-margin-lg">
                     <div class="col-md-5">
                         &nbsp;
                     </div>
                     <div class="col-md-3">
-                        <!-- <button mat-raised-button type="submit" class="btn btn-outline-success pull-right">Complete</button>
-                        <div class="clearfix"></div> -->
-                        <button mat-raised-button (click)="saveItemList()" class="btn btn-success pull-center">Complete</button>
+                        <button mat-raised-button (click)="saveItemList()" class="btn btn-success pull-center">Click to Ship Carton</button>
                         <div class="clearfix"></div>
                     </div>
                     <div class="col-md-2">
@@ -248,8 +288,6 @@
                     </div>
                     <div class="col-md-2">
                         &nbsp;
-                        <!-- <button mat-raised-button  (click)="updateItemList()" class="btn btn-outline-success pull-center">save</button>
-                        <div class="clearfix"></div> -->
                     </div>
                 </div>
             </div>

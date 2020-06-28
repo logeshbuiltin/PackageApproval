@@ -3,8 +3,8 @@
     position: sticky;
 }
 
-.table-container-50 {
-    height: 50vh !important;
+.table-container-85 {
+    height: 85vh !important;
     margin-top: 10px;
     overflow: scroll;
 }
@@ -49,4 +49,19 @@ th     { background:#eee; }
 .ngxImageZoomThumbnail {
     pointer-events: all !important;
     height: 40vh !important;
+}
+
+.img-align-lg {
+    margin-top: -18vh;
+    margin-right: 6vh;
+    z-index: 999999999;
+}
+
+.img-details-lg {
+    width: 7vw;
+    height: 16vh;
+}
+
+.row-margin-lg {
+    margin-bottom: 10px !important;
 }

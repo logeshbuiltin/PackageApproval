@@ -25,24 +25,7 @@ export class TableListComponent implements OnInit {
     this.apiUrl.getSkuList().subscribe(res =>{
       if(res && res.length > 0) {
         res.forEach(element => {
-          const data = {
-            skuNo: element.skuNo,
-            upcNo: element.upcNo,
-            asnNo: element.asnNo,
-            designNo: element.designNo,
-            itemDesc: element.itemDesc,
-            size: element.size,
-            gsm: element.gsm,
-            gsf: element.gsf,
-            itemType: element.itemType,
-            color: element.color,
-            netWeight: element.netWeight,
-            tolerance: element.tolerance,
-            ip: element.ip,
-            mp: element.mp,
-            id: element.id
-          }
-          this.skuDataList.push(data);
+          this.skuDataList.push(element);
         });
       }
     });

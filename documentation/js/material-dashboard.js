@@ -5,7 +5,7 @@
  =========================================================
 
  * Product Page: https://www.programreferenceandsolution.com/product/material-dashboard-angular2
- * Copyright 2017 Creative Tim (https://www.programreferenceandsolution.com)
+ * Copyright 2017 RazerockzTech (https://www.programreferenceandsolution.com)
  * Licensed under MIT (https://github.com/creativetimofficial/material-dashboard-angular/blob/master/LICENSE.md)
 
  =========================================================

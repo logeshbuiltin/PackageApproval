@@ -7,7 +7,7 @@
 -->
 
 <!--
-Love Creative Tim? Do you need Angular, React, Vuejs or HTML? You can visit:
+Love RazerockzTech? Do you need Angular, React, Vuejs or HTML? You can visit:
 👉  https://www.programreferenceandsolution.com/bundles
 👉  https://www.programreferenceandsolution.com
 -->

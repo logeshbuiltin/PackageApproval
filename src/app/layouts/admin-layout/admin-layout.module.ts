@@ -25,6 +25,7 @@ import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { HttpClientModule } from '@angular/common/http';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   imports: [
@@ -45,6 +46,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatTableModule,
     MatSnackBarModule,
     MatDialogModule,
+    MatExpansionModule,
     NgxImageZoomModule,
     HttpClientModule
   ],

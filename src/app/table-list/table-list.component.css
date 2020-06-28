@@ -1,3 +1,22 @@
 .table-responsive{
     height: 60vh;
 }
+
+thead th { 
+    position: sticky; 
+    top: 0; 
+    background: azure;
+    z-index: 999999;
+}
+
+.th-freeze {
+    position: sticky;
+    left: 0px;
+    z-index: 999999999;
+}
+
+.td-freeze {
+    position: sticky;
+    left: 0px;
+    background-color: #ffffff;
+}

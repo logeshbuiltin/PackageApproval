@@ -11,48 +11,50 @@
                       <div class="table-responsive">
                           <table class="table">
                               <thead class=" text-primary">
-                                  <th>SKU#</th>
+                                  <th class="th-freeze">SKU#</th>
                                   <th>UPC.No</th>
                                   <th>ASN.No</th>
-                                  <th>Design.No</th>
+                                  <th>Maxican Design.No</th>
                                   <th>Item Desc</th>
-                                  <th>Size</th>
-                                  <th>GSM</th>
-                                  <th>GSF</th>
-                                  <th>Item Type</th>
+                                  <th>Size(IN)</th>
                                   <th>Color</th>
+                                  <th>Net WT Item</th>
+                                  <th>GR WT Item</th>
+                                  <th>Tollerance</th>
+                                  <th>Order Qty</th>
+                                  <th>Order per CTN</th>
+                                  <th>FOLD SIZE(IN)</th>
+                                  <th>CTN size(IN) LxWxH</th>                               
+                                  <th>CBM/CTN</th>
                                   <th>Net Weight</th>
-                                  <th>Tolerance</th>
-                                  <th>IP</th>
-                                  <th>MP</th>
+                                  <th>GR WT CTN</th>
                                   <th>Action</th>
                               </thead>
                               <tbody *ngFor="let sku of skuDataList">
-                                  <tr>
-                                      <td>{{sku.skuNo}}</td>
-                                      <td>{{sku.upcNo}}</td>
-                                      <td>{{sku.asnNo}}</td>
-                                      <td>{{sku.designNo}}</td>
-                                      <td>{{sku.itemDesc}}</td>
-                                      <td>{{sku.size}}</td>
-                                      <td>{{sku.gsm}}</td>
-                                      <td>{{sku.gsf}}</td>
-                                      <td>{{sku.itemType}}</td>
-                                      <td>{{sku.color}}</td>
-                                      <td>{{sku.netWeight | number:'1.3-3'}}</td>
-                                      <td>{{sku.tolerance | number:'1.3-3'}}</td>
-                                      <td class="text-primary">
-                                          {{sku.ip}}
-                                      </td>
-                                      <td class="text-primary">
-                                        {{sku.mp}}
-                                      </td>
-                                      <td>
-                                        <button mat-raised-button  (click)="deleteMasterSku(sku)" class="btn-danger">
-                                            <i matTooltip="Delete SKU" class="material-icons icon-margin">delete</i>
-                                        </button>
-                                      </td>
-                                  </tr>
+                                <tr>
+                                    <td class="td-freeze">{{sku.skuNo}}</td>
+                                    <td>{{sku.upcNo}}</td>
+                                    <td>{{sku.asnNo}}</td>
+                                    <td>{{sku.designNo}}</td>
+                                    <td>{{sku.itemDesc}}</td>
+                                    <td>{{sku.size}}</td>
+                                    <td>{{sku.color}}</td>
+                                    <td>{{sku.netWeightItem}}</td>
+                                    <td>{{sku.grWeightItem}}</td>
+                                    <td>{{sku.tolerance | number:'1.3-3'}}</td>
+                                    <td>{{sku.orderQty}}</td>
+                                    <td>{{sku.qtyPerCtn}}</td>
+                                    <td>{{sku.foldSize}}</td>
+                                    <td>{{sku.ctnLength}}x{{sku.ctnWidth}}x{{sku.ctnHeight}}</td>
+                                    <td>{{sku.cbmCtn | number:'1.3-3'}}</td>
+                                    <td class="text-primary">{{sku.netWeightCtn | number:'1.3-3'}}</td>
+                                    <td class="text-primary">{{sku.grWeightCtn | number:'1.3-3'}}</td>
+                                    <td>
+                                    <button mat-raised-button  (click)="deleteMasterSku(sku)" class="btn-danger">
+                                        <i matTooltip="Delete SKU" class="material-icons icon-margin">delete</i>
+                                    </button>
+                                    </td>
+                                </tr>
                               </tbody>
                           </table>
                       </div>
