@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as XLSX from 'xlsx';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { ApiAccessProvider } from 'app/providers/api-access';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-typography',
@@ -13,6 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class TypographyComponent implements OnInit {
 
   fileToUpload: File = null;
+  selectedFile: File[] = [];
 
   public skuDataList: any[] = [];
   public skuMasterList: any[] = [];
@@ -20,6 +21,7 @@ export class TypographyComponent implements OnInit {
   constructor(
     private apiUrl: ApiAccessProvider,
     private snackbar: MatSnackBar,
+    private httpClient: HttpClient
   ) { }
 
   ngOnInit() {
@@ -58,7 +60,7 @@ export class TypographyComponent implements OnInit {
     if(data && data.length > 0) {
       data.forEach(element => {
         let dbsData = {
-          skuNo: element['SKU#'].toString(),
+          skuNo: element['SKU#']? element['SKU#'].toString(): "",
           upcNo: element['UPC#'],
           asnNo: element['ASN .NO'],
           designNo: element['MAXICAN DESIGN NO'],
@@ -67,7 +69,7 @@ export class TypographyComponent implements OnInit {
           color: element['COLOR'],
           netWeightItem: element['NET WT (KGS) OF ITEM'],
           grWeightItem: element['GR WT (KGS) OF ITEM'],
-          tolerance: element['tollarance'],
+          tolerance: element['Tollarance'],
           orderQty: element['order qty'],
           qtyPerCtn: element['Qty per ctn'],
           foldSize: element['FOLD SIZE (LXWXH) INCHES'],
@@ -77,10 +79,13 @@ export class TypographyComponent implements OnInit {
           cbmCtn: element['CBM/CARTON'],
           netWeightCtn: element['net weight'],
           grWeightCtn: element['GR WT OF CTN (KGS)'],
+          buyer: element['Buyer'],
           packAccess: ""
         }
-        this.skuMasterList.push(dbsData);
-        this.skuDataList.push(dbsData);
+        if(dbsData.skuNo) {
+          this.skuMasterList.push(dbsData);
+          this.skuDataList.push(dbsData);
+        }
       });
     }
   }
@@ -102,5 +107,31 @@ export class TypographyComponent implements OnInit {
     this.skuDataList = [];
     this.skuMasterList = [];
   }
+
+  public onFileChanged(event) {
+    //Select File
+    this.selectedFile = event.target.files;
+  }
+
+  onUpload() {
+    Array.from(this.selectedFile).forEach(element => {
+      let fileName = element.name.split('.');
+      let skuNo = fileName[0];
+      //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
+      const uploadImageData = new FormData();
+      uploadImageData.append('imageFile', element, element.name);
+      this.apiUrl.uploadImage(skuNo, uploadImageData).subscribe(response =>{
+        if(response) {
+          if (response.status == "success") {
+            this.snackbar.open("Success", 'Image uploaded successfully', {duration: 3000});
+            this.selectedFile = null;
+          } else {
+            this.snackbar.open("Success", 'Image not uploaded successfully', {duration: 3000});
+          }
+        }
+      });
+    });
+  }
+
 
 }

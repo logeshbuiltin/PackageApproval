@@ -7,7 +7,7 @@
                       <h4 class="card-title ">SKU History Table</h4>
                       <p class="card-category"> SKU completion details</p>
                   </div>
-                  <div class="card-body">
+                  <div class="card-body" style="display: contents;">
                       <div class="table-responsive">
                           <table class="table">
                               <thead class=" text-primary">
@@ -30,7 +30,7 @@
                                   <th>GR WT CTN</th>
                                   <th>Action</th>
                               </thead>
-                              <tbody *ngFor="let sku of skuDataList">
+                              <tbody *ngFor="let sku of skuDataList | paginate: { itemsPerPage: 20, currentPage: p }">
                                 <tr>
                                     <td class="td-freeze">{{sku.skuNo}}</td>
                                     <td>{{sku.upcNo}}</td>
@@ -58,6 +58,9 @@
                               </tbody>
                           </table>
                       </div>
+                  </div>
+                  <div class="paginator">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
                   </div>
               </div>
           </div>

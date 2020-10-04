@@ -1,5 +1,5 @@
 <div class="main-content">
-  <div class="container-fluid">
+  <div class="container-fluid top-margin-20">
     <mat-expansion-panel (opened)="panelOpenState = true"
     (closed)="panelOpenState = false">
         <mat-expansion-panel-header>
@@ -81,43 +81,47 @@
     </mat-expansion-panel>
       <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header card-header-danger">
-                    <h4 class="card-title">SKU #{{skuNo}}</h4>
-                    <p class="card-category">Complete your CTN</p>
-                    <p class="card-category">Enter Ctn number and pack the Ctn, once the below order is completed</p>
-                    <!-- <div class="logo-img image-margin-lg">
-                        <lib-ngx-image-zoom class="pull-right"
-                        [thumbImage]=myThumbnail
-                        [magnification]="2" 
-                        [zoomMode]="'hover'"
-                    ></lib-ngx-image-zoom>
-                    </div> -->
-                </div>
-                <!-- <div class="img-align-lg">
-                    <img class="logo-img pull-right img-details-lg" [src]="myThumbnail">
-                </div> -->
+            <div class="card card-lg">
                 <div class="card-body">
                     <form [formGroup]="skuDetailsForm"
                           data-automation-attribute="form-add-service">
-                        <div class="row">
-                            <div class="col-md-4">
+                        <div class="row row-cust-lg">
+                            <div class="col-md-3">
                               <mat-form-field class="example-full-width">
                                 <mat-label>SKU No.</mat-label>
                                 <mat-select
                                     placeholder="SKU"
                                     formControlName="skuNo"
+                                    [formControl]="skuSelectCtrl"
+                                    #skuSelect
                                     (selectionChange)="getSkuDetails()"
                                     [(ngModel)]="skuNo"
+                                    ngDefaultControl
                                     data-automation-attribute="text-encounter-no"
                                     >
-                                    <mat-option *ngFor="let sku of skuList" [value]="sku">
+                                    <mat-option>
+                                        <ngx-mat-select-search [formControl]="skuFilterCtrl" class="full-width"
+                                          [placeholderLabel]="'Search'"></ngx-mat-select-search>
+                                    </mat-option>
+                                    <mat-option *ngFor="let sku of filterSkus | async" [value]="sku">
                                         {{ sku }}
                                     </mat-option>
                                 </mat-select>
                                 </mat-form-field>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                  <mat-label>Product.ASN.No</mat-label>
+                                      <input
+                                        matInput
+                                        type="text"
+                                        [readonly]="true"
+                                        formControlName="asnNo"
+                                        placeholder="ASN No"
+                                      />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-2">
                                 <mat-form-field class="example-full-width">
                                     <mat-label>QTY/CTN</mat-label>
                                     <input
@@ -131,7 +135,7 @@
                                     />
                                 </mat-form-field>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <mat-form-field class="example-full-width">
                                     <mat-label>No of CTN</mat-label>
                                     <mat-select
@@ -146,20 +150,16 @@
                                     </mat-select>
                                 </mat-form-field>
                             </div>
+                            <div class="col-md-2">
+                                <mat-form-field class="example-full-width">
+                                  <mat-label>Packing Date</mat-label>
+                                  <input matInput formControlName="packingDate" [matDatepicker]="picker1">
+                                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                  <mat-datepicker #picker1></mat-datepicker>
+                                </mat-form-field>
+                              </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                              <mat-form-field class="example-full-width">
-                                <mat-label>Product.ASN.No</mat-label>
-                                    <input
-                                      matInput
-                                      type="text"
-                                      [readonly]="true"
-                                      formControlName="asnNo"
-                                      placeholder="ASN No"
-                                    />
-                              </mat-form-field>
-                            </div>
+                        <div class="row row-cust-lg">                          
                             <div class="col-md-4">
                               <mat-form-field class="example-full-width">
                                 <mat-label>Product Name</mat-label>
@@ -173,7 +173,7 @@
                                     />
                               </mat-form-field>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <mat-form-field class="example-full-width">
                                   <mat-label>Color</mat-label>
                                     <input
@@ -186,17 +186,7 @@
                                     />
                                 </mat-form-field>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                              <mat-form-field class="example-full-width">
-                                <mat-label>Packing Date</mat-label>
-                                <input matInput formControlName="packingDate" [matDatepicker]="picker1">
-                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                                <mat-datepicker #picker1></mat-datepicker>
-                              </mat-form-field>
-                            </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <mat-form-field class="example-full-width">
                                   <mat-label>ACT.Weight</mat-label>
                                     <input
@@ -208,7 +198,7 @@
                                     />
                                 </mat-form-field>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <mat-form-field class="example-full-width">
                                   <mat-label>Tolarance</mat-label>
                                     <input
@@ -219,6 +209,11 @@
                                         placeholder="Tolarance"
                                     />
                                 </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="alignment-img pull-right">
+                            <div class="img-contain">
+                                <img class="image-style" [src]="retrievedImage">
                             </div>
                         </div>
                     </form>

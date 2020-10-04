@@ -12,6 +12,12 @@ export class TableListComponent implements OnInit {
 
   public skuDataList: any[] = [];
 
+  //paging
+  public pageNo: number = 1;
+  public pageSize: number = 20;
+
+  p: any;
+
   constructor(
     private apiUrl: ApiAccessProvider,
     private snackbar: MatSnackBar,

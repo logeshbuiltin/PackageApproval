@@ -6,37 +6,66 @@
             <p class="card-category">Upload the excel file with correct SKU details</p>
         </div>
         <div class="card-body">
-            <div class="form-group">
-                <label for="file">Choose File</label>
-                <input type="file"
+            <div *ngIf="skuDataList.length == 0" class="container row">
+                <label for="file">Choose Excel File</label>
+                <div class="col-md-6">
+                    <input type="file"
                        id="file"
                        (change)="handleFileInput($event)"
                        accept=".xlsx">
+                </div>
             </div>
-            <div *ngIf="skuDataList.length > 0" class="table-responsive">
+            <div style="margin-top: 10px;" *ngIf="skuDataList.length == 0" class="container row">
+                <label for="file">Choose Image File</label>
+                <div class="col-md-6">
+                    <input type="file" (change)="onFileChanged($event)" multiple>
+                </div>
+                <div class="col-md-3">
+                    <input type="button" (click)="onUpload()" value="upload">
+                </div>
+            </div>
+            <div *ngIf="skuDataList.length > 0" class="table-responsive table-height-100">
                 <table class="table">
                     <thead class=" text-primary">
-                        <th>SKU#</th>
+                        <th>SKU.No</th>
+                        <th>UPC.No</th>
                         <th>ASN.No</th>
+                        <th>Maxican Design.No</th>
                         <th>Item Desc</th>
+                        <th>Size(IN)</th>
                         <th>Color</th>
+                        <th>Net WT Item</th>
+                        <th>GR WT Item</th>
+                        <th>Tollerance</th>
+                        <th>Order Qty</th>
+                        <th>Order per CTN</th>
+                        <th>FOLD SIZE(IN)</th>
+                        <th>CTN size(IN) LxWxH</th>                               
+                        <th>CBM/CTN</th>
                         <th>Net Weight</th>
-                        <th>Tolerance</th>
-                        <th>IP</th>
-                        <th>MP</th>
+                        <th>GR WT CTN</th>
                     </thead>
                     <tbody *ngFor="let sku of skuDataList">
                         <tr>
                             <td>{{sku.skuNo}}</td>
+                            <td>{{sku.upcNo}}</td>
                             <td>{{sku.asnNo}}</td>
+                            <td>{{sku.designNo}}</td>
                             <td>{{sku.itemDesc}}</td>
+                            <td>{{sku.size}}</td>
                             <td>{{sku.color}}</td>
                             <td>{{sku.netWeightItem | number:'1.3-3'}}</td>
+                            <td>{{sku.grWeightItem | number:'1.3-3'}}</td>
                             <td>{{sku.tolerance | number:'1.3-3'}}</td>
                             <td>{{sku.orderQty}}</td>
                             <td class="text-primary">
                               {{sku.qtyPerCtn}}
                             </td>
+                            <td>{{sku.foldSize}}</td>
+                            <td>{{sku.ctnLength}}x{{sku.ctnWidth}}x{{sku.ctnHeight}}</td>
+                            <td>{{sku.cbmCtn | number:'1.3-3'}}</td>
+                            <td class="text-primary">{{sku.netWeightCtn | number:'1.3-3'}}</td>
+                            <td class="text-primary">{{sku.grWeightCtn | number:'1.3-3'}}</td>
                         </tr>
                     </tbody>
                 </table>

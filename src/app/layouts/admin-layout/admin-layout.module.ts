@@ -26,6 +26,13 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { SkuctnListComponent } from 'app/skuctn-list/skuctn-list.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatCardModule} from '@angular/material/card';
+import { LoginComponent } from 'app/login/login.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { DirectAccessGuard } from 'app/services/DirectAccessGuard.service';
 
 @NgModule({
   imports: [
@@ -47,12 +54,17 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatSnackBarModule,
     MatDialogModule,
     MatExpansionModule,
+    MatCheckboxModule,
+    MatCardModule,
     NgxImageZoomModule,
-    HttpClientModule
+    NgxMatSelectSearchModule,
+    HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [  
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    DirectAccessGuard
   ],
   declarations: [
     DashboardComponent,
@@ -63,6 +75,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
+    SkuctnListComponent,
+    LoginComponent
   ]
 })
 

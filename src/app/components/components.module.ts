@@ -6,6 +6,7 @@ import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { PrintLabelComponent } from './print-label/print-label.component';
+import { PrintDetailsComponent } from './print-label/print-details/print-details.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { PrintLabelComponent } from './print-label/print-label.component';
     FooterComponent,
     NavbarComponent,
     SidebarComponent,
-    PrintLabelComponent
+    PrintLabelComponent,
+    PrintDetailsComponent,
   ],
   exports: [
     FooterComponent,

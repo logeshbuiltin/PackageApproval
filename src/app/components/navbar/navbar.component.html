@@ -1,14 +1,18 @@
 <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute fixed-top">
     <div class="container-fluid">
         <div class="navbar-wrapper">
-          <a class="navbar-brand" href="javascript:void(0)">{{getTitle()}}</a>
+          <ul class="nav">
+            <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+                <a class="nav-link" [routerLink]="[menuItem.path]">
+                    <i class="material-icons">{{menuItem.icon}}</i>
+                    <p>{{menuItem.title}}</p>
+                </a>
+            </li>
+          </ul>
         </div>
-        <button mat-raised-button class="navbar-toggler" type="button" (click)="sidebarToggle()">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-        </button>
+        <div class="back-color-lg">
+            <a class="navbar-brand" href="javascript:void(0)"><strong>{{getTitle()}}</strong></a>
+        </div>
         <div class="collapse navbar-collapse justify-content-end" id="navigation">
             <form class="navbar-form">
                 <div class="input-group no-border">
@@ -45,7 +49,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0)">
+                    <a matTooltip="Logout" (click)="logout()" class="nav-link" href="javascript:void(0)">
                         <i class="material-icons">person</i>
                         <p>
                             <span class="d-lg-none d-md-block">Account</span>

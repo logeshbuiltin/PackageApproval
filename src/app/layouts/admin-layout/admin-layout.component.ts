@@ -17,9 +17,21 @@ export class AdminLayoutComponent implements OnInit {
   private lastPoppedUrl: string;
   private yScrollStack: number[] = [];
 
-  constructor( public location: Location, private router: Router) {}
+  userName: string = "";
+  showSideNav: boolean = true;
+
+  constructor( public location: Location, private router: Router) {
+    router.events.subscribe(event => {
+        if (router.url === '/login') {
+            this.showSideNav = false;
+        } else {
+            this.showSideNav = true;
+        }
+    });
+  }
 
   ngOnInit() {
+      this.userName = localStorage.getItem('userData')? localStorage.getItem('userName'): '';
       const isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
 
       if (isWindows && !document.getElementsByTagName('body')[0].classList.contains('sidebar-mini')) {
@@ -47,14 +59,14 @@ export class AdminLayoutComponent implements OnInit {
                  window.scrollTo(0, 0);
          }
       });
-      this._router = this.router.events.filter(event => event instanceof NavigationEnd).subscribe((event: NavigationEnd) => {
-           elemMainPanel.scrollTop = 0;
-           elemSidebar.scrollTop = 0;
-      });
-      if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
-          let ps = new PerfectScrollbar(elemMainPanel);
-          ps = new PerfectScrollbar(elemSidebar);
-      }
+    //   this._router = this.router.events.filter(event => event instanceof NavigationEnd).subscribe((event: NavigationEnd) => {
+    //        elemMainPanel.scrollTop = 0;
+    //        elemSidebar.scrollTop = 0;
+    //   });
+    //   if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
+    //       let ps = new PerfectScrollbar(elemMainPanel);
+    //       ps = new PerfectScrollbar(elemSidebar);
+    //   }
 
       const window_width = $(window).width();
       let $sidebar = $('.sidebar');

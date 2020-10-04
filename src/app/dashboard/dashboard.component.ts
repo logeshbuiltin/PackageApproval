@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiAccessProvider } from 'app/providers/api-access';
@@ -6,6 +6,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { PrintLabelComponent } from 'app/components/print-label/print-label.component';
 import { ExportService } from 'app/components/services/ExcelFileGenerator';
+import { MatSelect } from '@angular/material/select';
+import { ReplaySubject, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,9 +16,16 @@ import { ExportService } from 'app/components/services/ExcelFileGenerator';
   styleUrls: ['./dashboard.component.css'],
   providers: [ApiAccessProvider]
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
   @ViewChild("focusText") focusText: ElementRef;
+
+  @ViewChild("skuSelect") skuSelect: MatSelect;
+  public skuFilterCtrl: FormControl = new FormControl();
+  public skuSelectCtrl: FormControl = new FormControl();
+  public filterSkus: ReplaySubject<any[]> = new ReplaySubject<any[]>(1);
+
+  protected _onDestroy = new Subject<void>();
 
   //variables
   skuNo: any = "";
@@ -28,6 +38,14 @@ export class DashboardComponent implements OnInit {
   actWeight: number = 0;
   tolarance: number = 0;
   size: string = "";
+  buyer: string;
+  ctnHeight: number;
+  ctnLength: number;
+  ctnWidth: number;
+
+  retrievedImage: any;
+  base64Data: any;
+  retrieveResonse: any;
 
   netWeightBox: number = 0;
   grWeightBox: number = 0;
@@ -80,6 +98,37 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.updateHeaders();
     this.getSkuList();
+    this.setInitialize();
+  }
+
+  ngOnDestroy(): void {
+    this._onDestroy.unsubscribe();
+  }
+
+  setInitialize() {
+    this.skuFilterCtrl.valueChanges
+     .pipe(takeUntil(this._onDestroy))
+     .subscribe(() => {
+       this.filterSku();
+    });
+  }
+
+  filterSku() {
+    if (!this.skuList) {
+      return;
+    }
+    // get the search keyword
+    let search = this.skuFilterCtrl.value;
+    if (!search) {
+      this.filterSkus.next(this.skuList.slice());
+      return;
+    } else {
+      search = search.toLowerCase();
+    }
+    // filter the banks
+    this.filterSkus.next(
+      this.skuList.filter(e => e.toLowerCase().indexOf(search) > -1)
+    );
   }
 
   updateHeaders() {
@@ -97,7 +146,8 @@ export class DashboardComponent implements OnInit {
   getSkuList() {
     this.apiUrl.getSkuNo().subscribe(res =>{
       if(res && res.length > 0) {
-        this.skuList = res;
+        this.skuList = res.sort();
+        this.filterSkus.next(this.skuList.slice());
         this.skuNo = localStorage.getItem('skuNo');
         if(this.skuNo) {
           this.getSkuDetails();
@@ -115,6 +165,7 @@ export class DashboardComponent implements OnInit {
         localStorage.setItem('skuNo', this.skuNo);
       }
     });
+    this.getImage(this.skuNo);
   }
 
   initializeFields(skuDetails: any) {
@@ -133,6 +184,10 @@ export class DashboardComponent implements OnInit {
     this.size = skuDetails.size;
     this.netWeightBox = skuDetails.netWeightCtn;
     this.grWeightBox = skuDetails.grWeightCtn;
+    this.buyer = skuDetails.buyer;
+    this.ctnHeight = skuDetails.ctnHeight;
+    this.ctnLength = skuDetails.ctnLength;
+    this.ctnWidth = skuDetails.ctnWidth;
 
     this.skuDetailsForm.setValue({
       skuNo: this.skuNo,
@@ -230,7 +285,9 @@ export class DashboardComponent implements OnInit {
             "tolerance": element.tolerance,
             "ctnNo": this.ctnNo,
             "status": element.status,
-            "itemSku": this.skuNo
+            "itemSku": this.skuNo,
+            "buyer": this.buyer,
+            "cbm":  ((this.ctnLength*0.0254)*(this.ctnWidth*0.0254)*(this.ctnHeight*0.0254)).toFixed(3)
           }
           dataList.push(data);
         });
@@ -330,13 +387,14 @@ export class DashboardComponent implements OnInit {
     return objects.filter(obj => obj.skuNo === skuNo).length;
   }
 
-  keytab(event){
-    //this.focusText.nativeElement.nextElementSibling.focus();
-    // let element = event.srcElement.nextElementSibling; // get the sibling element
-    // if(element == null)  // check if its null
-    //     return;
-    // else
-    //     element.focus();   // focus if not null
+  getImage(skuNo) {
+    this.apiUrl.downloadImage(skuNo).subscribe(res =>{
+      if(res) {
+        this.retrieveResonse = res;
+        this.base64Data = this.retrieveResonse.picByte;
+        this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
+      }
+    });
   }
 
   onInputEntry(event, id, nextInputIndex) {

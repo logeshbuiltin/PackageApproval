@@ -1,5 +1,5 @@
 @media print {
-    .headerMe, .footerMe {
+    :not(.printMe) {
       display: none !important;
     }
   }

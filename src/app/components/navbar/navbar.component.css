@@ -1,0 +1,16 @@
+.back-color-lg {
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+.container-fluid {
+    background: lightblue !important;
+}
+
+a:hover{background-color:#f4f4f4}
+a:focus{background-color:#f4f4f4}
+
+.navbar-collapse {
+    flex-grow: 0 !important;
+}

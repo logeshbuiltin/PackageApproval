@@ -1,18 +1,16 @@
 .table-responsive{
-    height: 80vh;
+    height: 60vh;
 }
 
 thead th { 
     position: sticky; 
     top: 0; 
     background: azure;
-    z-index: 999999;
 }
 
 .th-freeze {
     position: sticky;
     left: 0px;
-    z-index: 999999999;
 }
 
 .td-freeze {
@@ -21,16 +19,26 @@ thead th {
     background-color: #ffffff;
 }
 
+form {
+    margin-bottom: 0rem;
+}
+
 .main-content {
-    margin-top: 30px !important;
+    margin-top: 20px !important;
+}
+
+.card {
+    margin-bottom: 0px;
 }
 
 .container-fluid {
-    margin-top: 30px !important;
+    margin-top: 40px !important;
 }
 
-.paginator {
-    margin-top: 10px;
-    padding-top: 10px;
-    background-color: antiquewhite;
+
+/* ::ng-deep .mat-select-value{    
+    color: white!important;  } */
+
+.column-width {
+    width: 1vw !important;
 }
