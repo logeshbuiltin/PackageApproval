@@ -17,14 +17,14 @@
                         <div class="card-icon">
                             <i class="material-icons">content_copy</i>
                         </div>
-                        <p class="card-category">SKU</p>
+                        <p class="card-category">BALE NO</p>
                         <h3 class="card-title">#{{skuNo}}
                         </h3>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
                             <i class="material-icons text-danger">warning</i>
-                            <a href="javascript:void(0)">Pending SKU</a>
+                            <a href="javascript:void(0)">Pending BALE</a>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                         <div class="card-icon">
                             <i class="material-icons">check_circle_outline</i>
                         </div>
-                        <p class="card-category">Completed SKU</p>
+                        <p class="card-category">Completed BALE</p>
                         <h3 class="card-title">{{completedSku}}</h3>
                     </div>
                     <div class="card-footer">
@@ -51,7 +51,7 @@
                         <div class="card-icon">
                             <i class="material-icons">info_outline</i>
                         </div>
-                        <p class="card-category">Total SKU</p>
+                        <p class="card-category">Total BALE</p>
                         <h3 class="card-title">{{totalSku}}</h3>
                     </div>
                     <div class="card-footer">
@@ -88,7 +88,7 @@
                         <div class="row row-cust-lg">
                             <div class="col-md-3">
                               <mat-form-field class="example-full-width">
-                                <mat-label>SKU No.</mat-label>
+                                <mat-label>BALE No.</mat-label>
                                 <mat-select
                                     placeholder="SKU"
                                     formControlName="skuNo"
@@ -111,7 +111,7 @@
                             </div>
                             <div class="col-md-3">
                                 <mat-form-field class="example-full-width">
-                                  <mat-label>Product.ASN.No</mat-label>
+                                  <mat-label>Tracking.No</mat-label>
                                       <input
                                         matInput
                                         type="text"
@@ -123,7 +123,19 @@
                             </div>
                             <div class="col-md-2">
                                 <mat-form-field class="example-full-width">
-                                    <mat-label>QTY/CTN</mat-label>
+                                  <mat-label>Color</mat-label>
+                                      <input
+                                        matInput
+                                        type="text"
+                                        [readonly]="true"
+                                        formControlName="asnNo"
+                                        placeholder="ASN No"
+                                      />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-2">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Cut Length</mat-label>
                                     <input
                                       matInput
                                       type="number"
@@ -137,7 +149,7 @@
                             </div>
                             <div class="col-md-2">
                                 <mat-form-field class="example-full-width">
-                                    <mat-label>No of CTN</mat-label>
+                                    <mat-label>Denier</mat-label>
                                     <mat-select
                                         placeholder="CTN"
                                         formControlName="ctnNo"
@@ -150,19 +162,11 @@
                                     </mat-select>
                                 </mat-form-field>
                             </div>
-                            <div class="col-md-2">
-                                <mat-form-field class="example-full-width">
-                                  <mat-label>Packing Date</mat-label>
-                                  <input matInput formControlName="packingDate" [matDatepicker]="picker1">
-                                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                                  <mat-datepicker #picker1></mat-datepicker>
-                                </mat-form-field>
-                              </div>
                         </div>
                         <div class="row row-cust-lg">                          
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                               <mat-form-field class="example-full-width">
-                                <mat-label>Product Name</mat-label>
+                                <mat-label>Party</mat-label>
                                     <input
                                       matInput
                                       type="text"
@@ -173,9 +177,17 @@
                                     />
                               </mat-form-field>
                             </div>
+                            <div class="col-md-2">
+                                <mat-form-field class="example-full-width">
+                                  <mat-label>Packing Date</mat-label>
+                                  <input matInput formControlName="packingDate" [matDatepicker]="picker1">
+                                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                  <mat-datepicker #picker1></mat-datepicker>
+                                </mat-form-field>
+                            </div>
                             <div class="col-md-3">
                                 <mat-form-field class="example-full-width">
-                                  <mat-label>Color</mat-label>
+                                  <mat-label>Invoice Ref</mat-label>
                                     <input
                                         matInput
                                         type="text"
@@ -211,21 +223,21 @@
                                 </mat-form-field>
                             </div>
                         </div>
-                        <div class="alignment-img pull-right">
+                        <!-- <div class="alignment-img pull-right">
                             <div class="img-contain">
                                 <img class="image-style" [src]="retrievedImage">
                             </div>
-                        </div>
+                        </div> -->
                     </form>
                     <div class="table-container-85 tableFixHead">
                         <table class="table table-hover">
                             <thead class="text-warning">
-                                <th>S.No</th>
-                                <th>ASN.No</th>
-                                <th>Weight</th>
-                                <th>Tolerance</th>
-                                <th>Status</th>
-                                <th>Comments</th>
+                                <th>BALE No</th>
+                                <th>Lot No</th>
+                                <th>Cut Length</th>
+                                <th>Grade</th>
+                                <th>Issued</th>
+                                <th>Invoice Ref</th>
                             </thead>
                             <tbody *ngFor="let sku of skuDataList">
                                 <tr>
